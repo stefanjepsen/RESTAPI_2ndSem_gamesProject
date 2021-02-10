@@ -1,0 +1,26 @@
+{
+  "name": "men-restful-api",
+  "version": "1.0.0",
+  "description": "MongoDb-Test-Express-nodeJS RESTful API ",
+  "main": "server.js",
+  "scripts": {
+    "start-dev" : "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "SJ",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.14"
+  }
+}
