@@ -6,7 +6,7 @@ const app = express();
 require("dotenv-flow").config();
 
 // Prints message when server starts
-app.listen(() => console.log('It has begun....'))
+app.listen(() => console.log('It has begun..'))
 
 //Routes
 app.get("/api/welcome", (req, res) => {
