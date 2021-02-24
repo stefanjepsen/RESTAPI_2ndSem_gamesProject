@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 
-//Import game routes
+//Import routes
 const gameRoutes = require("./routes/game");
+const authRoutes = require("./routes/auth");
 
 require("dotenv-flow").config();
 
@@ -39,6 +40,9 @@ app.get("/api/welcome", (req, res) => {
 // CRUD
 
 app.use("/api/games", gameRoutes);
+app.use("/api/user", authRoutes);
+
+// /api/user/login ->post
 
 const PORT = process.env.PORT || 4000;
 
