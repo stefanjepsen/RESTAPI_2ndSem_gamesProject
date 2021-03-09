@@ -2,6 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
+const swaggerUi = require("swagger-ui-express");
+const yaml = require("yamljs");
+
+//setup swagger 
+const swaggerDefinition = yaml.load('./swagger.yaml');
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 
 //Import routes
 const gameRoutes = require("./routes/game");

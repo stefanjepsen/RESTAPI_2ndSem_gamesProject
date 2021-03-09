@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const game = require("../models/game");
-
+const {  verifyToken } = require("../valdation");
+ 
 // CRUD operations
 
 
 // /api/games/
 //Create game -> post
 
-router.post("/", (req, res) => {
+router.post("/", verifyToken, (req, res) => {
 
     data = req.body;
 
@@ -67,7 +68,7 @@ router.get("/:id", (req, res) => {
 
 
 // Update specific game -> put
-router.put("/:id", (req, res) => {
+router.put("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id;
 
@@ -91,7 +92,7 @@ router.put("/:id", (req, res) => {
 
 // Delete specific game -> Delete
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
 
     const id = req.params.id;
 
