@@ -19,8 +19,8 @@ describe('/first test Collection',  () => {
         .get('/api/welcome')
         .end((err, res) => {
          expect(res.status).to.be.equal(200); 
-          let msg =  res.body.message;
-          console.log(msg);
+          // let msg =  res.body.message; <-- Giver en besked i consol med den tekst besked som følger med route. 
+         // console.log(msg);
             done();
         });
     });
