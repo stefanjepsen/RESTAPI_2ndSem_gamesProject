@@ -38,15 +38,15 @@ mongoose.connection.once("open", () => console.log("Connected succefully to Mong
 //Routes
 app.get("/api/welcome", (req, res) => {
     
-    res.status(200).send({message: "This is an API Call !"});
+    res.status(200).send({message: "Welcome To the api"});
     
 });
 
 
 // CRUD
 
-app.use("/api/games", gameRoutes);
-app.use("/api/user", authRoutes);
+app.use("/api/games", gameRoutes);//Crud Routes
+app.use("/api/user", authRoutes);//Auth routes (register, login)
 
 // /api/user/login ->post
 
