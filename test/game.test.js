@@ -107,6 +107,7 @@ describe('first test Collection', () => {
         .send(userCredentials)
         .end((err, res) => {
             expect(res.status).to.be.equal(200);
+            expect(res.body.error).to.be.equal(null);
             done();
         }); 
     });
