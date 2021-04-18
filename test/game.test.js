@@ -37,7 +37,7 @@ describe('first test Collection', () => {
             expect(res.body).to.be.a('array');
             expect(res.body).to.have.lengthOf(0);
             done();
-        }); 
+        }).catch(done);
     });
 
 
