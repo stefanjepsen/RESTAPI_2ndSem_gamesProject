@@ -19,7 +19,7 @@ require("dotenv-flow").config();
 app.use(bodyParser.json());
 
 // Prints message when server starts
-app.listen(() => console.log('It has begun..'))
+app.listen(() => console.log('Server Started correctly'))
 
 
 

@@ -1,8 +1,3 @@
-//Switch db to test enviroment
-process.env.NODE_ENV = 'test';
-
-const Game = require('../models/game');
-
 const assert = require('chai').assert;
 const chai = require('chai');
 const expect = chai.expect;
@@ -11,23 +6,13 @@ const server = require('../server.js');
 
 chai.use(chaiHttp);
 
-//Cleanup before running tests
-before((done) => {
-    Game.deleteMany({}, function(err) {});
-    done();
-});
-
-//Cleaning up DB_Test after usage
-after((done) => {
-    Game.deleteMany({}, function(err) {});
-    done();
-});
 
 
 
 
 
-describe('/first test Collection', () => {
+
+describe('first test Collection', () => {
 
     it('Testing welcome route', (done) => {
         chai.request(server)
@@ -86,6 +71,64 @@ describe('/first test Collection', () => {
             done();
         }); 
     });
+
+    it('Checks if invalid game and correct error message', (done) => {
+
+        let game = {
+            name: "123",
+            publisher: "123",
+            genre: "123",
+            details: "123",
+            releaseYear: "Not Released",
+            recommended: 123
+        }
+
+        chai.request(server)
+        .post('/api/games')
+        .send(game)
+        .end((err, res) => {
+            expect(res.status).to.be.equal(500);
+            done();
+        }); 
+    });
+
+
+    //Checks if can make a valid user
+    it('Create a valid user credential', (done) => {
+        let userCredentials = {
+            name: "user_test_1",
+            email: "user_test_1@test.dk",
+            password: "123456789"
+            
+        }
+
+        chai.request(server)
+        .post('/api/user/register')
+        .send(userCredentials)
+        .end((err, res) => {
+            expect(res.status).to.be.equal(200);
+            done();
+        }); 
+    });
+
+        //Checks if can make a valid user
+        it('Checks if sends correct error when sending an already existing email address ', (done) => {
+            let userCredentials = {
+                name: "test",
+                email: "user_test_1@test.dk",
+                password: "123456789"
+                
+            }
+    
+            chai.request(server)
+            .post('/api/user/register')
+            .send(userCredentials)
+            .end((err, res) => {
+                expect(res.status).to.be.equal(400);
+                expect(res.body).to.be.a('object');
+                done();
+            }); 
+        });
 
 
 
