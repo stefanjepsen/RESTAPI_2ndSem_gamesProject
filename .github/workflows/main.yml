@@ -6,8 +6,9 @@ on:
 
 jobs:
   
-  test_node_12:
-    name: Test on Node 12
+  test:
+    name: Test
+    needs: [test_node_12]    
     runs-on: ubuntu-latest
     
     steps:
@@ -19,7 +20,7 @@ jobs:
       - name: Use Node.JS ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '14.x'
       
       - name: NPM install, build and test
         run: |
@@ -29,3 +30,4 @@ jobs:
           DBHOST: ${{ secrets.DBHOST }}  
           TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}  
           JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}  
+
