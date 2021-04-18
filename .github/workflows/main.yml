@@ -1,58 +1,31 @@
 name: Node.JS CI/CD
 
-on:
+on: 
   push:
     branches: [main]
 
 jobs:
-  
-  test_node_12:
-    name: Test on Node 12
+
+  test_node:
+    name: Test on Node
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Use Node.JS ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: '12.x'
-      
-      - name: NPM install, build and test
-        run: |
-          npm install
-          npm test
-        env:
-          DBHOST: ${{ secrets.DBHOST }}  
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}  
-          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}  
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
 
+        - name: Use Node.JS ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14.x'
 
-
-  test_node_14:
-    name: Test on Node 14 
-    needs: [test_node_12]    
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Use Node.JS ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-      
-      - name: NPM install, build and test
-        run: |
-          npm install
-          npm test
-        env:
-          DBHOST: ${{ secrets.DBHOST }}  
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}  
-          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}  
+        - name: NPM install, build and test
+          run: |
+            npm install
+            npm test
+          env:
+            DBHOST: ${{ secrets.DBHOST }}      
+            TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}      
+            JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}      
