@@ -1,21 +1,21 @@
 const router = require("express").Router();
 const game = require("../models/game");
-const {  verifyToken } = require("../valdation");
- 
+const {
+    verifyToken
+} = require("../valdation");
+
 // CRUD operations
 
 
 // /api/games/
 //Create game -> post
 
-router.post("/", verifyToken, (req, res) => {
-
+//router.post("/", verifyToken, (req, res) => {
+router.post("/", (req, res) => {
     data = req.body;
 
     game.insertMany(data)
-        .then(data => {
-            res.send(data);
-        })
+        .then(data => { res.status(201).send(data);})
         .catch(err => {
             res.status(500).send({
                 message: err.message
@@ -80,7 +80,9 @@ router.put("/:id", verifyToken, (req, res) => {
                     message: " Cannot update game with id=" + id + ".Maybe game was not found!"
                 })
             } else {
-                res.send({  message: " Game was succesfully updated"  })
+                res.send({
+                    message: " Game was succesfully updated"
+                })
             }
         })
         .catch(err => {
@@ -103,7 +105,9 @@ router.delete("/:id", verifyToken, (req, res) => {
                     message: " Cannot delete game with id=" + id + ".Maybe game was not found!"
                 })
             } else {
-                res.send({  message: " Game was succesfully deleted"  })
+                res.send({
+                    message: " Game was succesfully deleted"
+                })
             }
         })
         .catch(err => {
