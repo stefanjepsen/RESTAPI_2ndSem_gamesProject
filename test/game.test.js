@@ -43,7 +43,7 @@ describe('first test Collection', () => {
     
 
 
-    it('Should POST a valid product', (done) => {
+    it('Should POST a valid game', (done) => {
 
         let game ={
             name: "testGame",
