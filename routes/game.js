@@ -70,7 +70,8 @@ router.get("/:id", (req, res) => {
 
 
 // Update specific game -> put
-router.put("/:id", verifyToken, (req, res) => {
+//router.put("/:id", verifyToken, (req, res) => {
+router.put("/:id", (req, res) => {
 
     const id = req.params.id;
 
@@ -96,7 +97,8 @@ router.put("/:id", verifyToken, (req, res) => {
 
 // Delete specific game -> Delete
 
-router.delete("/:id", verifyToken, (req, res) => {
+//router.delete("/:id", verifyToken, (req, res) => {
+router.delete("/:id",  (req, res) => {
 
     const id = req.params.id;
 

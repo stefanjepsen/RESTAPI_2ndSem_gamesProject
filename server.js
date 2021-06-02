@@ -22,12 +22,17 @@ app.use(bodyParser.json());
 app.listen(() => console.log('Server Started correctly'))
 
 
+// Handle CORS
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "auth-token, Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 
-mongoose.connect
-(
-    process.env.DBHOST,
-    {
+
+mongoose.connect(
+    process.env.DBHOST, {
         useUnifiedTopology: true,
         useNewUrlParser: true
     }
@@ -37,23 +42,25 @@ mongoose.connection.once("open", () => console.log("Connected succefully to Mong
 
 //Routes
 app.get("/api/welcome", (req, res) => {
-    
-    res.status(200).send({message: "Welcome To the api"});
-    
+
+    res.status(200).send({
+        message: "Welcome To the api"
+    });
+
 });
 
 
 // CRUD
 
-app.use("/api/games", gameRoutes);//Crud Routes
-app.use("/api/user", authRoutes);//Auth routes (register, login)
+app.use("/api/games", gameRoutes); //Crud Routes
+app.use("/api/user", authRoutes); //Auth routes (register, login)
 
 // /api/user/login ->post
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, function() {
-    console.log("Server is running on port: " + PORT) ;
+app.listen(PORT, function () {
+    console.log("Server is running on port: " + PORT);
 })
 
 module.exports = app;

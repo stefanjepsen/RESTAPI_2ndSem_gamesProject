@@ -31,21 +31,21 @@ describe('first test Collection', () => {
 
     it('Verify that we have 0 games in the db', (done) => {
         chai.request(server)
-        .get('/api/games')
-        .end((err, res) => {
-            expect(res.status).to.be.equal(200);
-            expect(res.body).to.be.a('array');
-            expect(res.body).to.have.lengthOf(0);
-            done();
-        });
+            .get('/api/games')
+            .end((err, res) => {
+                expect(res.status).to.be.equal(200);
+                expect(res.body).to.be.a('array');
+                expect(res.body).to.have.lengthOf(0);
+                done();
+            });
     });
 
-    
+
 
 
     it('Should POST a valid game', (done) => {
 
-        let game ={
+        let game = {
             name: "testGame",
             publisher: "Testy",
             genre: "cakeAdventure",
@@ -55,23 +55,23 @@ describe('first test Collection', () => {
         }
 
         chai.request(server)
-        .post('/api/games')
-        .send(game)
-        .end((err, res) => {
-            expect(res.status).to.be.equal(201);
-            done();
-        }); 
+            .post('/api/games')
+            .send(game)
+            .end((err, res) => {
+                expect(res.status).to.be.equal(201);
+                done();
+            });
     });
 
     it('Verify that we have 1 game in the db', (done) => {
         chai.request(server)
-        .get('/api/games')
-        .end((err, res) => {
-            expect(res.status).to.be.equal(200);
-            expect(res.body).to.be.a('array');
-            expect(res.body).to.have.lengthOf(1);
-            done();
-        }); 
+            .get('/api/games')
+            .end((err, res) => {
+                expect(res.status).to.be.equal(200);
+                expect(res.body).to.be.a('array');
+                expect(res.body).to.have.lengthOf(1);
+                done();
+            });
     });
 
     it('Checks if invalid game and correct error message', (done) => {
@@ -86,12 +86,12 @@ describe('first test Collection', () => {
         }
 
         chai.request(server)
-        .post('/api/games')
-        .send(game)
-        .end((err, res) => {
-            expect(res.status).to.be.equal(500);
-            done();
-        }); 
+            .post('/api/games')
+            .send(game)
+            .end((err, res) => {
+                expect(res.status).to.be.equal(500);
+                done();
+            });
     });
 
 
@@ -101,37 +101,37 @@ describe('first test Collection', () => {
             name: "user_test_1",
             email: "user_test_1@test.dk",
             password: "123456789"
-            
+
         }
 
         chai.request(server)
-        .post('/api/user/register')
-        .send(userCredentials)
-        .end((err, res) => {
-            expect(res.status).to.be.equal(200);
-            expect(res.body.error).to.be.equal(null);
-            done();
-        }); 
+            .post('/api/user/register')
+            .send(userCredentials)
+            .end((err, res) => {
+                expect(res.status).to.be.equal(200);
+                expect(res.body.error).to.be.equal(null);
+                done();
+            });
     });
 
-        //Checks if can make a valid user
-        it('Checks if sends correct error when sending an already existing email address ', (done) => {
-            let userCredentials = {
-                name: "test",
-                email: "user_test_1@test.dk",
-                password: "123456789"
-                
-            }
-    
-            chai.request(server)
+    //Checks if can make a valid user
+    it('Checks if sends correct error when sending an already existing email address ', (done) => {
+        let userCredentials = {
+            name: "test",
+            email: "user_test_1@test.dk",
+            password: "123456789"
+
+        }
+
+        chai.request(server)
             .post('/api/user/register')
             .send(userCredentials)
             .end((err, res) => {
                 expect(res.status).to.be.equal(400);
                 expect(res.body).to.be.a('object');
                 done();
-            }); 
-        });
+            });
+    });
 
 
 
